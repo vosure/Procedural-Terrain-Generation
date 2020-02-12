@@ -19,10 +19,10 @@
 			const static float epsilon = 1E-4;
 
 			int layerCount;
-			float3 baseColours[maxLayerCount];
+			float3 baseColors[maxLayerCount];
 			float baseStartHeights[maxLayerCount];
 			float baseBlends[maxLayerCount];
-			float baseColourStrength[maxLayerCount];
+			float baseColorStrength[maxLayerCount];
 			float baseTextureScales[maxLayerCount];
 
 			float minHeight;
@@ -58,10 +58,10 @@
 				for (int i = 0; i < layerCount; i++) {
 					float drawStrength = inverseLerp(-baseBlends[i] / 2 - epsilon, baseBlends[i] / 2, heightPercent - baseStartHeights[i]);
 
-					float3 baseColour = baseColours[i] * baseColourStrength[i];
-					float3 textureColour = triplanar(IN.worldPos, baseTextureScales[i], blendAxes, i) * (1 - baseColourStrength[i]);
+					float3 baseColor = baseColors[i] * baseColorStrength[i];
+					float3 textureColor = triplanar(IN.worldPos, baseTextureScales[i], blendAxes, i) * (1 - baseColorStrength[i]);
 
-					o.Albedo = o.Albedo * (1 - drawStrength) + (baseColour + textureColour) * drawStrength;
+					o.Albedo = o.Albedo * (1 - drawStrength) + (baseColor + textureColor) * drawStrength;
 				}
 
 
